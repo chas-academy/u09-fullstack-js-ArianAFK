@@ -3,7 +3,7 @@ const ProductDetails = ({ product }) => {
         <div className="product-details">
             <h4>{product.title}</h4>
             <p><strong>Includes: </strong>{product.description}</p>
-            <p><strong>Price: </strong>{product.price}<strong> $</strong></p>
+            <p><strong>Price: </strong>{product.price} $/month</p>
         </div>
     )
 }

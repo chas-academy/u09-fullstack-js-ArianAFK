@@ -26,3 +26,33 @@ header a {
   padding: 20px;
   margin: 0 auto;
 }
+
+.product-details {
+  background: gray;
+  border-radius: 4px;
+  margin: 20px auto;
+  padding: 20px;
+  position: relative;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.product-details h4 {
+  margin: 0 0 10px 0;
+  font-size: 2em;
+}
+
+.product-details p {
+  font-size: 1.2em;
+  color: #333;
+}
+
+.product-details span {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+  background: #f1f1f1;
+  padding: 6px;
+  border-radius: 50%;
+  color: #333;
+}
