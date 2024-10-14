@@ -14,10 +14,6 @@ const productSchema = new Schema({
     price: {
         type: Number,
         required: true
-    },
-    load: {
-        type: Number,
-        required: true
     }
 }, { timestamps: true })
 
