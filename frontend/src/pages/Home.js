@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 
 // components
 import ProductDetails from '../components/ProductDetails'
+import ProductForm from '../components/ProductForm'
 
 const Home = () => {
     const [products, setProducts] = useState(null)
@@ -21,6 +22,7 @@ const Home = () => {
 
     return (
         <div className="home">
+            <ProductForm />
             <div className='products'>
                 {products && products.map((product) => (
                     <ProductDetails key={product._id} product={product} />
