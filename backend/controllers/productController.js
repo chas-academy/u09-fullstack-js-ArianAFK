@@ -29,6 +29,21 @@ const getProduct = async (req, res) => {
 const createProduct = async (req, res) => {
     const { title, description, price, load } = req.body
 
+    let emptyFields = []
+
+    if (!title) {
+        emptyFields.push('title')
+    }
+    if (!description) {
+        emptyFields.push('description')
+    }
+    if (!price) {
+        emptyFields.push('price')
+    }
+    if (emptyFields.length > 0) {
+        return res.status(400).json({ error: 'Please fill in all the fields', emptyFields })
+    }
+
     // add doc to DB
     try {
         const product = await Product.create({ title, description, price })
