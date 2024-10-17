@@ -108,6 +108,16 @@ nav a {
   margin-left: 10px;
 }
 
+nav button {
+  background: #fff;
+  color: green;
+  border: 2px solid green;
+  padding: 6px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1em;
+}
+
 form.signup,
 form.login {
   max-width: 400px;
