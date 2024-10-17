@@ -1,8 +1,8 @@
-import { createContext, UseReducer } from 'react'
+import { createContext, useReducer } from 'react'
 
 export const AuthContext = createContext()
 
-export const authReducer = (statee, action) => {
+export const authReducer = (state, action) => {
     switch (action.type) {
         case 'LOGIN':
             return { user: action.payload }
