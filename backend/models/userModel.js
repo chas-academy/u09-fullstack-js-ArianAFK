@@ -13,6 +13,11 @@ const userSchema = new Schema({
     password: {
         type: String,
         required: true
+    },
+    role: {   // Lägg till roll för att kunna särskilja admin och vanliga användare
+        type: String,
+        enum: ['user', 'admin'],  // Endast 'user' eller 'admin' är tillåtna roller
+        default: 'user'
     }
 })
 
@@ -40,7 +45,7 @@ userSchema.statics.signup = async function (email, password) {
     const salt = await bcrypt.genSalt(10)
     const hash = await bcrypt.hash(password, salt)
 
-    const user = await this.create({ email, password: hash })
+    const user = await this.create({ email, password: hash, role: 'user' })  // Ny användare får rollen 'user' som standard
 
     return user
 }
@@ -65,7 +70,3 @@ userSchema.statics.login = async function (email, password) {
         throw Error('Incorrect password')
     }
 
-    return user
-}
-
-module.exports = mongoose.model('User', userSchema)

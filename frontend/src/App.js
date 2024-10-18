@@ -1,5 +1,5 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { useAuthContext } from './hooks/useAuthContext';
 // pages and components
 import Home from './pages/Home';
 import Login from './pages/Login';
@@ -7,6 +7,8 @@ import Signup from './pages/Signup';
 import Navbar from './components/Navbar';
 
 function App() {
+  const { user } = useAuthContext();  // get user login status
+
   return (
     <div className="App">
       <BrowserRouter>
@@ -19,11 +21,11 @@ function App() {
             />
             <Route
               path="/login"
-              element={<Login />}
+              element={!user ? <Login /> : <Navigate to="/" />} // Redirect to home
             />
             <Route
               path="/signup"
-              element={<Signup />}
+              element={!user ? <Signup /> : <Navigate to="/" />} // Redirect to home
             />
           </Routes>
         </div>
