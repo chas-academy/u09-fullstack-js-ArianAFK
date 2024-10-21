@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useProductsContext } from '../hooks/useProductsContext'
 
 // components
@@ -7,6 +7,8 @@ import ProductForm from '../components/ProductForm'
 
 const Home = () => {
     const { products, dispatch } = useProductsContext()
+    const [filter, setFilter] = useState('');
+
 
     useEffect(() => {
         const fetchProducts = async () => {
@@ -21,11 +23,20 @@ const Home = () => {
         fetchProducts()
     }, [])
 
+    const filterProducts = (e) => {
+        setFilter(e.target.value)
+    }
+
+    const productsFiltered = products?.filter((product) =>
+        product?.title.toLowerCase().includes(filter?.toLowerCase())
+    )
+
     return (
         <div className="home">
             <ProductForm />
+            <input placeholder='Products...' onChange={filterProducts} />
             <div className='products'>
-                {products && products.map((product) => (
+                {productsFiltered && productsFiltered.map((product) => (
                     <ProductDetails key={product._id} product={product} />
                 ))}
             </div>

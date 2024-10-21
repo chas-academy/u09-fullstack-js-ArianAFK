@@ -1,13 +1,17 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { useAuthContext } from './hooks/useAuthContext';
-// pages and components
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Navbar from './components/Navbar';
+import Admin from './pages/Admin';
+import { useEffect, useState } from 'react';
 
 function App() {
-  const { user } = useAuthContext();  // get user login status
+  const { user } = useAuthContext();  // Get user login status
+  const [role, setRole] = useState('');
+  const [loading, setLoading] = useState(true);  // New loading state
+
 
   return (
     <div className="App">
@@ -15,18 +19,10 @@ function App() {
         <Navbar />
         <div className='pages'>
           <Routes>
-            <Route
-              path="/"
-              element={<Home />}
-            />
-            <Route
-              path="/login"
-              element={!user ? <Login /> : <Navigate to="/" />} // Redirect to home
-            />
-            <Route
-              path="/signup"
-              element={!user ? <Signup /> : <Navigate to="/" />} // Redirect to home
-            />
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={!user ? <Login /> : <Navigate to="/" />} />
+            <Route path="/signup" element={!user ? <Signup /> : <Navigate to="/" />} />
+            {user && <Route path="/admin" element={user.role === 'admin' ? <Admin role={user.role} /> : <Navigate to="/" />} />}
           </Routes>
         </div>
       </BrowserRouter>

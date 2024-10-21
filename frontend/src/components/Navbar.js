@@ -5,6 +5,7 @@ import { useAuthContext } from "../hooks/useAuthContext";
 const Navbar = () => {
     const { logout } = useLogout()
     const { user } = useAuthContext()
+    console.log(user)
 
     const handleClick = () => {
         logout()
@@ -17,6 +18,13 @@ const Navbar = () => {
                     <h1>Boss-media</h1>
                 </Link>
                 <nav>
+                    {user && user.role === 'admin' && (
+                        <div>
+                            <Link to="/admin"><button>Admin-dashboard</button></Link>
+                        </div>
+                    )}
+
+
                     {user && (
                         <div>
                             <span>{user.email}</span>

@@ -6,7 +6,7 @@ export const useSignup = () => {
     const [isLoading, setIsLoading] = useState(null)
     const { dispatch } = useAuthContext()
 
-    const signup = async (email, password) => {
+    const signup = async (email, password, stayInAdmin = false) => {
         setIsLoading(true)
         setError(null)
 
@@ -21,7 +21,7 @@ export const useSignup = () => {
             setIsLoading(false)
             setError(json.error)
         }
-        if (response.ok) {
+        if (response.ok && !stayInAdmin) {
             // save the user to local storage
             localStorage.setItem('user', JSON.stringify(json))
 
@@ -30,6 +30,8 @@ export const useSignup = () => {
 
             setIsLoading(false)
         }
+
+        return json
     }
 
     return { signup, isLoading, error }

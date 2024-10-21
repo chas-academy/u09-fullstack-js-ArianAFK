@@ -14,9 +14,9 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
-    role: {   // Lägg till roll för att kunna särskilja admin och vanliga användare
+    role: {   // add roll
         type: String,
-        enum: ['user', 'admin'],  // Endast 'user' eller 'admin' är tillåtna roller
+        enum: ['user', 'admin'],  // only 'user' or 'admin' allowed
         default: 'user'
     }
 })
@@ -60,13 +60,22 @@ userSchema.statics.login = async function (email, password) {
 
     const user = await this.findOne({ email })
 
+    console.log(user)
+
     if (!user) {
         throw Error('Incorrect email')
     }
 
     const match = await bcrypt.compare(password, user.password)
 
+    console.log(match)
+
     if (!match) {
         throw Error('Incorrect password')
     }
 
+    return user
+
+}
+
+module.exports = mongoose.model('User', userSchema)
