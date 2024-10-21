@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { useProductsContext } from '../hooks/useProductsContext'
+import { useAuthContext } from "../hooks/useAuthContext";
 
 const ProductForm = () => {
     const { dispatch } = useProductsContext()
@@ -8,6 +9,7 @@ const ProductForm = () => {
     const [price, setPrice] = useState('')
     const [error, setError] = useState(null)
     const [emptyFields, setEmptyFields] = useState([])
+    const { user } = useAuthContext()
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -39,7 +41,9 @@ const ProductForm = () => {
     }
 
     return (
-        <form className="create" onSubmit={handleSubmit}>
+    <div>
+        {user && user.role === 'admin' && (
+            <form className="create" onSubmit={handleSubmit}>
             <h3>Add a new Product</h3>
 
             <label>Product Title:</label>
@@ -69,6 +73,9 @@ const ProductForm = () => {
             <button>Add Product</button>
             {error && <div className="error">{error}</div>}
         </form>
+        )}
+        </div>
+        
     )
 }
 

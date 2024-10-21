@@ -34,7 +34,7 @@ const Home = () => {
     return (
         <div className="home">
             <ProductForm />
-            <input placeholder='Products...' onChange={filterProducts} />
+            <input className='search' placeholder='Products...' onChange={filterProducts} />
             <div className='products'>
                 {productsFiltered && productsFiltered.map((product) => (
                     <ProductDetails key={product._id} product={product} />

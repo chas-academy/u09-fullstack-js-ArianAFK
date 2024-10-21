@@ -25,6 +25,29 @@ header a {
   max-width: 1400px;
   padding: 20px;
   margin: 0 auto;
+  display: flex;
+  justify-content: center;
+}
+
+.home {
+  display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.create {
+  width: 300px;
+  border-radius: 4px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  margin: 50px auto;
+  padding: 20px 45px;
+  display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.search {
+  max-width: 500px;
 }
 
 .product-details {
@@ -55,11 +78,6 @@ header a {
   padding: 6px;
   border-radius: 50%;
   color: #333;
-}
-
-label,
-input {
-  display: block;
 }
 
 input {
@@ -120,6 +138,12 @@ nav button {
   margin-right: 10px;
 }
 
+.admin-button {
+  color: grey;
+  border: 2px solid grey;
+  background: #fff;
+}
+
 form.signup,
 form.login {
   max-width: 400px;
@@ -127,6 +151,9 @@ form.login {
   padding: 20px;
   background-color: #fff;
   border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 a {
@@ -137,9 +164,20 @@ a {
 .admin-container {
   padding: 20px;
   font-family: Arial, sans-serif;
+  margin: 0 auto;
+  display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.admin-signup {
+  display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .admin-table {
+  max-width: 800px;
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
@@ -172,3 +210,24 @@ tr:hover {
 .home {
   margin-top: 20px;
 }
+
+.create-user {
+  border-radius: 4px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  margin: 50px auto;
+  padding: 20px 45px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 300px;
+}
+
+
+@media (max-width: 768px) {
+      header .container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+    }

@@ -1,7 +1,9 @@
 import { useProductsContext } from '../hooks/useProductsContext'
+import { useAuthContext } from "../hooks/useAuthContext";
 
 const ProductDetails = ({ product }) => {
     const { dispatch } = useProductsContext()
+    const { user } = useAuthContext()
 
     const handleClick = async () => {
         const response = await fetch('/api/products/' + product._id, {
@@ -19,7 +21,10 @@ const ProductDetails = ({ product }) => {
             <h4>{product.title}</h4>
             <p><strong>Includes: </strong>{product.description}</p>
             <p><strong>Price: </strong>{product.price} $/month</p>
-            <span onClick={handleClick}>Delete</span>
+            {user && user.role === 'admin' && (
+                <span onClick={handleClick}>Delete</span>
+            )}
+            
         </div>
     )
 }

@@ -20,7 +20,7 @@ const Navbar = () => {
                 <nav>
                     {user && user.role === 'admin' && (
                         <div>
-                            <Link to="/admin"><button>Admin-dashboard</button></Link>
+                            <Link to="/admin"><button className='admin-button'>Admin-dashboard</button></Link>
                         </div>
                     )}
 

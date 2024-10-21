@@ -149,8 +149,9 @@ const Admin = ({ role }) => {
 
     return (
         <div className="admin-container">
+            <div className='create-user'>
             <h1>Admin Panel</h1>
-            <h2>User List</h2>
+            <h2>Create a new user</h2>
             <form className="admin-signup" onSubmit={handleSubmit}>
                 <label>Email:</label>
                 <input
@@ -166,9 +167,13 @@ const Admin = ({ role }) => {
                 />
 
                 <button>Create user</button>
+                </form>
+                </div>
+            <h2>User List</h2>
+            
 
                 {error && <div className="error">{error}</div>}
-            </form>
+            
             {loading && <p>Loading...</p>}
             {error && <p className="error">{error}</p>}
             {users.length === 0 ? (
@@ -177,7 +182,7 @@ const Admin = ({ role }) => {
                 <table className="admin-table">
                     <thead>
                         <tr>
-                            <th>Id</th>
+                            {/* <th>Id</th> */}
                             <th>Email</th>
                             <th>Admin</th>
                             <th></th>
@@ -186,9 +191,9 @@ const Admin = ({ role }) => {
                     <tbody>
                         {users.map((user) => (
                             <tr key={user._id}>
-                                <td>
+                                {/* <td>
                                     <span>{user._id}</span>
-                                </td>
+                                </td> */}
                                 <td>
                                     <input
                                         type="text"
