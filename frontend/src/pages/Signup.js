@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useSignup } from "../hooks/useSignup";
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Signup = () => {
     const [email, setEmail] = useState('');
@@ -18,6 +18,7 @@ const Signup = () => {
     }
 
     return (
+        <div className="signup-container">
         <form className="signup" onSubmit={handleSubmit}>
             <h3>Sign up</h3>
 
@@ -37,6 +38,10 @@ const Signup = () => {
             <button disabled={isLoading}>Sign up</button>
             {error && <div className="error">{error}</div>}
         </form>
+         <p className="login-prompt">
+         Already registered? <Link to="/login">Log in</Link>
+     </p>
+     </div>
     )
 }
 

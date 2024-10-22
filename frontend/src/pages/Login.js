@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useLogin } from '../hooks/useLogin';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -18,6 +18,7 @@ const Login = () => {
     }
 
     return (
+        <div className="login-container">
         <form className="login" onSubmit={handleSubmit}>
             <h3>Log in</h3>
 
@@ -37,6 +38,10 @@ const Login = () => {
             <button disabled={isLoading}>Log in</button>
             {error && <div className="error">{error}</div>}
         </form>
+        <p className="signup-prompt">
+        Don't have an account? <Link to="/signup">Sign up</Link>
+    </p>
+    </div>
     )
 }
 
