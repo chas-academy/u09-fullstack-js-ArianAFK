@@ -32,7 +32,8 @@ app.use(express.json())
     app.use(
         cors({
             origin: [
-                "http://localhost:3000"
+                "http://localhost:3000",
+                "https://bossmedia.netlify.app"
             ],
             methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
             credentials: true,
