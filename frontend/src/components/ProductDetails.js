@@ -1,5 +1,6 @@
 import { useProductsContext } from '../hooks/useProductsContext'
 import { useAuthContext } from "../hooks/useAuthContext";
+import { Link } from 'react-router-dom';
 
 const ProductDetails = ({ product }) => {
     const { dispatch } = useProductsContext()
@@ -17,14 +18,18 @@ const ProductDetails = ({ product }) => {
     }
 
     return (
-        <div className="product-details">
+        <div className="product-card">
             <h4>{product.title}</h4>
             <p><strong>Includes: </strong>{product.description}</p>
             <p><strong>Price: </strong>{product.price} $/month</p>
+            <div className='button-container'>
+            <Link to={`/product/${product._id}`}>
+                    <button className="view-service-button">View Service</button>
+                </Link>
             {user && user.role === 'admin' && (
-                <span onClick={handleClick}>Delete</span>
+                <span className='delete-button' onClick={handleClick}>Delete</span>
             )}
-            
+            </div>
         </div>
     )
 }
