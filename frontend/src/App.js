@@ -5,12 +5,12 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Navbar from './components/Navbar';
 import Admin from './pages/Admin';
-import { useEffect, useState } from 'react';
+/* import { useState } from 'react'; */
 
 function App() {
   const { user } = useAuthContext();  // Get user login status
-  const [role, setRole] = useState('');
-  const [loading, setLoading] = useState(true);  // New loading state
+  /* const [role, setRole] = useState('');
+  const [loading, setLoading] = useState(true);  // New loading state */
 
 
   return (

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useAuthContext } from '../hooks/useAuthContext';
 import { useSignup } from '../hooks/useSignup';
 
@@ -10,11 +10,10 @@ const Admin = ({ role }) => {
     const [timeoutIds, setTimeoutIds] = useState({});
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const { signup, err, isLoading } = useSignup();
+    const { signup } = useSignup();
 
-
-
-    const fetchUsers = async () => {
+    // Memoisera fetchUsers så att den bara skapas om user eller role förändras
+    const fetchUsers = useCallback(async () => {
         if (!user || !user.token) return;
 
         try {
@@ -38,26 +37,22 @@ const Admin = ({ role }) => {
         } finally {
             setLoading(false);
         }
-    };
+    }, [user, role]); // Använd user och role som beroenden
 
+    // Kör useEffect och inkludera den memoiserade fetchUsers
     useEffect(() => {
         fetchUsers();
-    }, [user, role]);
+    }, [fetchUsers]); // Nu är fetchUsers memoiserad och kan säkert inkluderas här
 
+    // Resten av komponenten
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        const stayInAdmin = true
-
+        const stayInAdmin = true;
         const success = await signup(email, password, stayInAdmin);
-        console.log(success)
-
         if (success) {
-            //get list
-            fetchUsers()
+            fetchUsers();
         }
-
-    }
+    };
 
     const handleCheckboxChange = async (id) => {
         const userToUpdate = users.find((user) => user._id === id);
@@ -137,43 +132,41 @@ const Admin = ({ role }) => {
                 'Content-Type': 'application/json',
                 'Role': role,
             },
-        })
-
+        });
 
         if (response.ok) {
-            setUsers((prevUsers) => prevUsers.filter(user => user._id !== id))
+            setUsers((prevUsers) => prevUsers.filter((user) => user._id !== id));
         } else {
-            console.error("Something went wrong")
+            console.error('Something went wrong');
         }
-    }
+    };
 
     return (
         <div className="admin-container">
             <div className='create-user'>
-            <h1>Admin Panel</h1>
-            <h2>Create a new user</h2>
-            <form className="admin-signup" onSubmit={handleSubmit}>
-                <label>Email:</label>
-                <input
-                    type="email"
-                    onChange={(e) => setEmail(e.target.value)}
-                    value={email}
-                />
-                <label>Password:</label>
-                <input
-                    type="password"
-                    onChange={(e) => setPassword(e.target.value)}
-                    value={password}
-                />
+                <h1>Admin Panel</h1>
+                <h2>Create a new user</h2>
+                <form className="admin-signup" onSubmit={handleSubmit}>
+                    <label>Email:</label>
+                    <input
+                        type="email"
+                        onChange={(e) => setEmail(e.target.value)}
+                        value={email}
+                    />
+                    <label>Password:</label>
+                    <input
+                        type="password"
+                        onChange={(e) => setPassword(e.target.value)}
+                        value={password}
+                    />
 
-                <button>Create user</button>
+                    <button>Create user</button>
                 </form>
-                </div>
+            </div>
             <h2>User List</h2>
-            
 
-                {error && <div className="error">{error}</div>}
-            
+            {error && <div className="error">{error}</div>}
+
             {loading && <p>Loading...</p>}
             {error && <p className="error">{error}</p>}
             {users.length === 0 ? (
@@ -182,7 +175,6 @@ const Admin = ({ role }) => {
                 <table className="admin-table">
                     <thead>
                         <tr>
-                            {/* <th>Id</th> */}
                             <th>Email</th>
                             <th>Admin</th>
                             <th></th>
@@ -191,9 +183,6 @@ const Admin = ({ role }) => {
                     <tbody>
                         {users.map((user) => (
                             <tr key={user._id}>
-                                {/* <td>
-                                    <span>{user._id}</span>
-                                </td> */}
                                 <td>
                                     <input
                                         type="text"

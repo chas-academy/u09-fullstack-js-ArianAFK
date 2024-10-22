@@ -21,7 +21,7 @@ const Home = () => {
         }
 
         fetchProducts()
-    }, [])
+    }, [dispatch])
 
     const filterProducts = (e) => {
         setFilter(e.target.value)
