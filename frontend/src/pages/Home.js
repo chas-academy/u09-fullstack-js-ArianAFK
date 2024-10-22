@@ -12,7 +12,7 @@ const Home = () => {
 
     useEffect(() => {
         const fetchProducts = async () => {
-            const response = await fetch('/api/products') // make sure you change to CORS for launch
+            const response = await fetch('https://u09-fullstack-js-arianafk.onrender.com/api/products') // make sure you change to CORS for launch
             const json = await response.json()
 
             if (response.ok) {

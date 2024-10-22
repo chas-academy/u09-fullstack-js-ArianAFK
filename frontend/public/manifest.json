@@ -1,6 +1,7 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Boss-media",
+  "name": "Boss-media",
+  "description": "We strive for the best social media marketing",
   "icons": [
     {
       "src": "favicon.ico",

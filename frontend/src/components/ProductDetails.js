@@ -6,7 +6,7 @@ const ProductDetails = ({ product }) => {
     const { user } = useAuthContext()
 
     const handleClick = async () => {
-        const response = await fetch('/api/products/' + product._id, {
+        const response = await fetch('https://u09-fullstack-js-arianafk.onrender.com/api/products/' + product._id, {
             method: 'DELETE'
         })
         const json = await response.json()

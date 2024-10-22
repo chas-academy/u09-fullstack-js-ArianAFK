@@ -18,7 +18,7 @@ const Admin = ({ role }) => {
         if (!user || !user.token) return;
 
         try {
-            const response = await fetch('/api/user/allusers', {
+            const response = await fetch('https://u09-fullstack-js-arianafk.onrender.com/api/user/allusers', {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${user.token}`,
@@ -64,7 +64,7 @@ const Admin = ({ role }) => {
         const updatedRole = userToUpdate.role === 'admin' ? 'user' : 'admin';
 
         try {
-            const response = await fetch(`/api/user/update/${id}`, {
+            const response = await fetch(`https://u09-fullstack-js-arianafk.onrender.com/api/user/update/${id}`, {
                 method: 'PATCH',
                 headers: {
                     'Authorization': `Bearer ${user.token}`,
@@ -90,7 +90,7 @@ const Admin = ({ role }) => {
 
     const updateEmail = async (id, value) => {
         try {
-            const response = await fetch(`/api/user/update/${id}`, {
+            const response = await fetch(`https://u09-fullstack-js-arianafk.onrender.com/api/user/update/${id}`, {
                 method: 'PATCH',
                 headers: {
                     'Authorization': `Bearer ${user.token}`,
@@ -130,7 +130,7 @@ const Admin = ({ role }) => {
     };
 
     const deleteUser = async (id) => {
-        const response = await fetch(`/api/user/delete/${id}`, {
+        const response = await fetch(`https://u09-fullstack-js-arianafk.onrender.com/api/user/delete/${id}`, {
             method: 'DELETE',
             headers: {
                 'Authorization': `Bearer ${user.token}`,

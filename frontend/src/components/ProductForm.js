@@ -16,7 +16,7 @@ const ProductForm = () => {
 
         const product = { title, description, price }
 
-        const response = await fetch('/api/products', {
+        const response = await fetch('https://u09-fullstack-js-arianafk.onrender.com/api/products', {
             method: 'POST',
             body: JSON.stringify(product),
             headers: {
